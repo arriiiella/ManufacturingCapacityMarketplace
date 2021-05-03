@@ -1,0 +1,12 @@
+.no-data-available {
+    text-align: center;
+}
+
+.ngHide {
+    display: none;
+}
+
+.thead-dark-empty {
+    width  : 100%;
+    display: table;
+}

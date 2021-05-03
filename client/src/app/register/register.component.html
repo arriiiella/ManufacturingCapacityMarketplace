@@ -1,0 +1,595 @@
+<!-- STEP 1 -->
+<form #registerForm="ngForm" autocomplete="off" *ngIf="step == 1">
+  <h2 class="text-center text-primary">Registration</h2>
+  <hr />
+  <div class="form-group row">
+    <label
+      for="FirstName"
+      class="col-sm-3 col-form-label"
+      aria-label="First Name"
+      >First Name</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        name="FirstName"
+        [(ngModel)]="RegisterModel.FirstName"
+        placeholder="First Name"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="LastName" class="col-sm-3 col-form-label" aria-label="Last Name"
+      >Last Name</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        name="LastName"
+        [(ngModel)]="RegisterModel.LastName"
+        placeholder="Last Name"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="Username" class="col-sm-3 col-form-label" aria-label="Username"
+      >Username</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        name="Username"
+        [(ngModel)]="RegisterModel.UserName"
+        placeholder="Username"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="Email" class="col-sm-3 col-form-label" aria-label="Email"
+      >Email</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="email"
+        class="form-control"
+        name="Email"
+        [(ngModel)]="RegisterModel.Email"
+        placeholder="Email"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="Password" class="col-sm-3 col-form-label" aria-label="Password"
+      >Password</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="password"
+        class="form-control"
+        name="Password"
+        [(ngModel)]="RegisterModel.Password"
+        placeholder="Password"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="CPassword"
+      class="col-sm-3 col-form-label"
+      aria-label="Confirm Password"
+      >Confirm Password</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="password"
+        class="form-control"
+        name="CPassword"
+        [(ngModel)]="RegisterModel.CPassword"
+        placeholder="Confirm Password"
+      />
+    </div>
+  </div>
+  <div class="form-group text-center">
+    <button
+      class="btn btn-success mr-2"
+      (click)="completeStep1()"
+      type="submit"
+      aria-label="Next"
+    >
+      Next
+    </button>
+  </div>
+</form>
+
+<!-- STEP 2 -->
+<form #register2Form="ngForm" autocomplete="off" *ngIf="step == 2">
+  <h2 class="text-center text-primary" aria-label="Customer Registration">
+    Registration – Customer Info
+  </h2>
+  <hr />
+  <div class="form-group row">
+    <label
+      for="BusinessName"
+      class="col-sm-3 col-form-label"
+      aria-label="Business Name"
+      >Business Name
+    </label>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        name="BusinessName"
+        [(ngModel)]="CustomerModel.Name"
+        placeholder="Business Name"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="IndustryType"
+      class="col-sm-3 col-form-label"
+      aria-label="Industry Type"
+      >Industry Type
+    </label>
+    <div class="col-sm-9">
+      <select
+        [(ngModel)]="CustomerModel.IndustryId"
+        class="form-control"
+        name="IndustryType"
+      >
+        <option value="0">Select Industry Type</option>
+        <option *ngFor="let industry of IndustryTypes" [value]="industry.id">
+          {{ industry.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="Address" class="col-sm-3 col-form-label" aria-label="Address"
+      >Address</label
+    >
+    <div class="col-sm-7">
+      <select
+        [(ngModel)]="CustomerModel.AddressId"
+        class="form-control"
+        name="Address"
+      >
+        <option value="0">Select Address</option>
+        <option *ngFor="let addr of AddressesModel" [value]="addr.Id">
+          {{ addr.Name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <button
+        class="btn btn-primary mr-2"
+        (click)="openAddress(content)"
+        type="button"
+        aria-label="Add Address"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="VAT"
+      class="col-sm-3 col-form-label"
+      aria-label="VAT Registration No"
+      >VAT Registration</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        name="VAT"
+        [(ngModel)]="CustomerModel.VatRegistrationNo"
+        placeholder="VAT"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="Password"
+      class="col-sm-3 col-form-label"
+      aria-label="Billing Address"
+      >Billing Address
+    </label>
+    <div class="col-sm-7">
+      <select
+        [(ngModel)]="CustomerModel.BillingAddressId"
+        class="form-control"
+        name="BillingAddress"
+      >
+        <option value="0">Select Address</option>
+        <option *ngFor="let addr of AddressesModel" [value]="addr.Id">
+          {{ addr.Name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <button
+        class="btn btn-primary mr-2"
+        (click)="openAddress(content)"
+        type="button"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="Usage"
+      class="col-sm-3 col-form-label"
+      aria-label="Customer Type"
+      >Customer Type
+    </label>
+    <div class="col-sm-9">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          checked
+          type="radio"
+          value="IsPurchaseCapacity"
+          name="CustomerUsage"
+          (change)="setUsage('Purchase Capacity')"
+        />
+        <label
+          class="form-check-label"
+          for="IsPurchaseCapacity"
+          aria-label="Purchase Capacity"
+        >
+          Purchase Capacity
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="IsSellCapacity"
+          name="CustomerUsage"
+          (click)="setUsage('Sell Capacity')"
+        />
+        <label
+          class="form-check-label"
+          for="IsSellCapacity"
+          aria-label="Sell Capacity"
+        >
+          Sell Capacity
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          value="UseBothCapacity"
+          name="CustomerUsage"
+          (click)="setUsage('Purchase and Sell Capacity')"
+        />
+        <label
+          class="form-check-label"
+          for="UseBothCapacity"
+          aria-label="Purchase and Sell Capacity"
+        >
+          Purchase and Sell Capacity
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group text-center">
+    <button
+      class="btn btn-danger mr-2"
+      (click)="step = 1"
+      type="button"
+      aria-label="Previous"
+    >
+      Previous
+    </button>
+    <button
+      class="btn btn-success mr-2"
+      (click)="completeStep2()"
+      type="submit"
+      aria-label="Next"
+    >
+      Next
+    </button>
+  </div>
+</form>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" aria-label="Add Address">
+      Add Address
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group row">
+        <div class="col-md-6">
+          <label for="AddressName" aria-label="Name">Name</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              required
+              name="AddressName"
+              [(ngModel)]="AddressModel.Name"
+              placeholder="Name Of Address"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="Email" aria-label="Email">Email</label>
+          <div class="input-group">
+            <input
+              type="email"
+              class="form-control"
+              name="Email"
+              [(ngModel)]="AddressModel.Email"
+              placeholder="Email"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="AddressName" aria-label="Address Line 1"
+          >Address Line 1</label
+        >
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            name="AddressName"
+            [(ngModel)]="AddressModel.Address1"
+            placeholder="Address Line 1"
+          />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="AddressName" aria-label="Address Line 2"
+          >Address Line 2</label
+        >
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            name="AddressName2"
+            [(ngModel)]="AddressModel.Address2"
+            placeholder="Address Line 2"
+          />
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-4">
+          <label for="City" aria-label="City">City</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="City"
+              [(ngModel)]="AddressModel.City"
+              placeholder="City"
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="Country" aria-label="County">County</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="County"
+              [(ngModel)]="AddressModel.County"
+              placeholder="County"
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="PostalCode" aria-label="Postal Code">Postal Code</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="PostalCode"
+              [(ngModel)]="AddressModel.Postcode"
+              placeholder="PostalCode"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-md-4">
+          <label for="CountryCode" aria-label="Country">Country</label>
+          <div class="input-group">
+            <select
+              [(ngModel)]="AddressModel.CountryCode"
+              class="form-control"
+              name="CountryCode"
+            >
+              <option value="">Select Country</option>
+              <option *ngFor="let country of countries" [value]="country.code">
+                {{ country.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="Telephone" aria-label="Telephone">Telephone</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="Telephone"
+              [(ngModel)]="AddressModel.Telephone"
+              placeholder="Telephone"
+            />
+          </div>
+        </div>
+        <div class="col-md-4">
+          <label for="Fax" aria-label="Fax">Fax</label>
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="Fax"
+              [(ngModel)]="AddressModel.Fax"
+              placeholder="Fax"
+            />
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="saveAddress()"
+      aria-label="Save Address"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+
+<!-- STEP 3 -->
+<form #register3Form="ngForm" autocomplete="off" *ngIf="step == 3">
+  <h2 class="text-center text-primary" aria-label="Manufacturer Registration">
+    Registration – Manufacturer
+  </h2>
+  <hr />
+  <div class="form-group row">
+    <label
+      for="ManufacturerName"
+      class="col-sm-3 col-form-label"
+      aria-label="Business Name"
+      >Business Name
+    </label>
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        name="ManufacturerName"
+        [(ngModel)]="ManufacturerModel.Name"
+        placeholder="Business Name"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="MIndustryType"
+      class="col-sm-3 col-form-label"
+      aria-label="Industry Type"
+      >Industry Type
+    </label>
+    <div class="col-sm-9">
+      <select
+        [(ngModel)]="ManufacturerModel.IndustryId"
+        class="form-control"
+        name="MIndustryType"
+      >
+        <option value="0">Select Industry Type</option>
+        <option *ngFor="let industry of IndustryTypes" [value]="industry.id">
+          {{ industry.name }}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="MAddress" class="col-sm-3 col-form-label" aria-label="Address"
+      >Address</label
+    >
+    <div class="col-sm-7">
+      <select
+        [(ngModel)]="ManufacturerModel.AddressId"
+        class="form-control"
+        name="MAddress"
+      >
+        <option value="0">Select Address</option>
+        <option *ngFor="let addr of AddressesModel" [value]="addr.Id">
+          {{ addr.Name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <button
+        class="btn btn-primary mr-2"
+        (click)="openAddress(content)"
+        type="button"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="MVAT"
+      class="col-sm-3 col-form-label"
+      aria-label="VAT Registration No"
+      >VAT Registration</label
+    >
+    <div class="col-sm-9">
+      <input
+        type="text"
+        class="form-control"
+        name="MVAT"
+        [(ngModel)]="ManufacturerModel.VatRegistrationNo"
+        placeholder="VAT"
+      />
+    </div>
+  </div>
+  <div class="form-group row">
+    <label
+      for="MBillingAddress"
+      class="col-sm-3 col-form-label"
+      aria-label="Billing Address"
+      >Billing Address
+    </label>
+    <div class="col-sm-7">
+      <select
+        [(ngModel)]="ManufacturerModel.BillingAddressId"
+        class="form-control"
+        name="MBillingAddress"
+      >
+        <option value="0">Select Address</option>
+        <option *ngFor="let addr of AddressesModel" [value]="addr.Id">
+          {{ addr.Name }}
+        </option>
+      </select>
+    </div>
+    <div class="col-sm-2">
+      <button
+        class="btn btn-primary mr-2"
+        (click)="openAddress(content)"
+        type="button"
+        aria-label="Add Address"
+      >
+        Add
+      </button>
+    </div>
+  </div>
+  <div class="form-group text-center">
+    <button class="btn btn-danger mr-2" (click)="step = 2" type="button">
+      Previous
+    </button>
+    <button
+      class="btn btn-success mr-2"
+      (click)="completeStep3()"
+      type="submit"
+      aria-label="Save Address"
+    >
+      Save
+    </button>
+  </div>
+</form>

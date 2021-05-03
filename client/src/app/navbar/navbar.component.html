@@ -1,0 +1,114 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a
+      class="navbar-brand"
+      href="#"
+      routerLink="/"
+      aria-label="Manufacturing Marketplace"
+      >Manufacturing Marketplace</a
+    >
+
+    <button
+      class="navbar-toggler collapsed"
+      type="button"
+      (click)="isCollapsed = !isCollapsed"
+      aria-controls="collapseBasic"
+      aria-expanded="!isCollapsed"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="navbar-collapse"
+      id="collapseBasic"
+      [collapse]="isCollapsed"
+      [isAnimated]="true"
+    >
+      <ul
+        class="navbar-nav mr-auto"
+        *ngIf="accountService.currentUser$ | async"
+      >
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            href="#"
+            routerLink="/search"
+            aria-label="Search Capacity"
+            >Search Capacity</a
+          >
+        </li>
+        <li class="nav-item" *ngIf="userInfo?.customer?.isSellCapacity == true">
+          <a
+            class="nav-link"
+            href="#"
+            routerLink="locations"
+            aria-label="Upload Capacity"
+            >Upload Capacity</a
+          >
+        </li>
+        <li class="nav-item dropdown" dropdown>
+          <a
+            class="nav-link dropdown-toggle"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+            aria-label="Orders"
+            dropdownToggle
+          >
+            Orders
+          </a>
+          <div
+            class="dropdown-menu"
+            aria-labelledby="navbarDropdown"
+            *dropdownMenu
+          >
+            <a
+              class="dropdown-item"
+              routerLink="/customer-orders"
+              aria-label="Customer Orders"
+              >Customer</a
+            >
+            <a
+              class="dropdown-item"
+              *ngIf="userInfo?.customer?.isSellCapacity == true"
+              routerLink="/manufacturer-orders"
+              aria-label="Manufacturer Orders"
+              >Manufacturer</a
+            >
+          </div>
+        </li>
+      </ul>
+
+      <div
+        class="nav-item dropdown"
+        *ngIf="accountService.currentUser$ | async as user"
+        dropdown
+      >
+        <a class="dropdown-toggle text-light" dropdownToggle
+          >Welcome {{ user.username }}</a
+        >
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <a class="dropdown-item" routerLink="/account" aria-label="Account"
+            >Account</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/account" aria-label="Settings"
+            >Settings</a
+          >
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()" aria-label="Logout"
+            >Logout</a
+          >
+        </div>
+      </div>
+    </div>
+    <div *ngIf="(accountService.currentUser$ | async) === null">
+      <a class="btn btn-outline-success" routerLink="/login" aria-label="Login">
+        Already have an account? Login
+      </a>
+    </div>
+  </div>
+</nav>

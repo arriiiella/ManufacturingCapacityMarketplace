@@ -1,0 +1,30 @@
+<div class="container">
+  <div style="text-align: center">
+    <h1>Welcome {{ userInfo?.firstName }}!</h1>
+    <p class="lead">
+      The Manufacturing Marketplace is a space for manufacturers to post details
+      of the spare capacity in their factories. <br />It also allow for others
+      to search and buy available capacity in their specific area of
+      manufacturing.
+    </p>
+    <p class="lead">
+      To begin your journey, either search or sell using the buttons below!
+    </p>
+  </div>
+  <div class="text-center">
+    <button
+      (click)="searchClick()"
+      class="btn btn-success btn-lg mr-2"
+      aria-label="Search Capacity"
+    >
+      Search Capacity
+    </button>
+    <button
+      (click)="sellClick()"
+      class="btn btn-info btn-lg"
+      aria-label="Sell Capacity"
+    >
+      Sell Capacity
+    </button>
+  </div>
+</div>

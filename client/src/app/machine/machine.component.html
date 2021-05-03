@@ -1,0 +1,272 @@
+<div class="col-md-6 offset-md-3">
+  <form #locationForm="ngForm" autocomplete="off">
+    <h2 class="text-center text-primary">Add Machines</h2>
+    <hr />
+    <div class="form-group row">
+      <label
+        for="LocationId"
+        class="col-form-label"
+        aria-label="Machine Location"
+        >Machine Location
+      </label>
+      <div class="col-sm-9">
+        <select
+          [(ngModel)]="locationId"
+          class="form-control"
+          name="LocationId"
+          (change)="reloadTableForLocationChange()"
+        >
+          <option value="0">Select Address</option>
+          <option
+            *ngFor="let loc of ManufacturingLocationsModel"
+            [value]="loc.id"
+          >
+            {{ loc.name }}
+          </option>
+        </select>
+        <button
+          class="btn col btn-primary mr-2"
+          (click)="clickAddLocation()"
+          type="button"
+          aria-label="Add New Location"
+        >
+          Add New Location
+        </button>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <button
+        class="btn btn-success mr-2"
+        (click)="openMachinePopup(content)"
+        type="button"
+        aria-label="Add Machine"
+      >
+        Add Machine
+      </button>
+    </div>
+  </form>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" aria-label="Add Machine">
+        Add Machine
+      </h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="AddressName" aria-label="Machine Name"
+              >Machine Name</label
+            >
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                required
+                name="AddressName"
+                [(ngModel)]="MachineModel.Name"
+                placeholder="Machine Name"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="ModelNo" aria-label="Model No">Model No</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                name="ModelNo"
+                [(ngModel)]="MachineModel.ModelNo"
+                placeholder="Model No"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="Capacity" aria-label="Capacity"
+              >Capacity <br />(Minutes available a week)
+            </label>
+            <div class="input-group">
+              <input
+                type="number"
+                class="form-control"
+                name="Capacity"
+                [(ngModel)]="MachineModel.Capacity"
+                placeholder="Capacity"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="SetupTime" aria-label="Setup Time">Setup Time</label>
+            <div class="input-group">
+              <input
+                type="number"
+                class="form-control"
+                name="SetupTime"
+                [(ngModel)]="MachineModel.SetupTime"
+                placeholder="Setup Time"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="CostPerUnit" aria-label="Cost per Unit"
+              >Cost Per Unit</label
+            >
+            <div class="input-group">
+              <input
+                type="number"
+                class="form-control"
+                name="CostPerUnit"
+                [(ngModel)]="MachineModel.CostPerUnit"
+                placeholder="Cost Per Unit"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="Process" aria-label="Process">Process</label>
+            <div class="input-group">
+              <select
+                [(ngModel)]="MachineModel.ManufacturingProcessId"
+                class="form-control"
+                name="ManufacturingProcessId"
+              >
+                <option value="0">Select Process</option>
+                <option
+                  *ngFor="let process of ManufacturingProcessesModel"
+                  [value]="process.id"
+                >
+                  {{ process.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="saveMachine()"
+        aria-label="Save Machine"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
+</div>
+
+<div [class.ngHide]="searchCriteria.isPageLoad" style="width: 100%">
+  <table
+    datatable
+    [dtOptions]="dtOptions"
+    class="row-border hover table table-responsive"
+    width="100%"
+  >
+    <thead
+      class="thead-dark"
+      [ngClass]="
+        MachinesModel != null && MachinesModel?.length != 0
+          ? 'thead-dark'
+          : 'thead-dark thead-dark-empty'
+      "
+    >
+      <tr>
+        <th aria-label="Name">Name</th>
+        <th aria-label="Model No">Model No</th>
+        <th aria-label="Capacity">Capacity</th>
+        <th aria-label="Setup Time">Setup Time</th>
+        <th aria-label="Cost Per Unit">Cost Per Unit</th>
+        <th aria-label="Process">Process</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="MachinesModel != null || MachinesModel?.length != 0">
+      <tr *ngFor="let machine of MachinesModel">
+        <td style="width: 30%">{{ machine.name }}</td>
+        <td style="width: 30%">{{ machine.modelNo }}</td>
+        <td style="width: 10%">{{ machine.capacity }}</td>
+        <td style="width: 10%">{{ machine.setupTime }}</td>
+        <td style="width: 10%">{{ machine.costPerUnit }}</td>
+        <td style="width: 30%">{{ machine.manufacturingProcess?.name }}</td>
+        <td style="width: 2%">
+          <a class="pointer" (click)="deletePopup(deleteContent, machine.id)"
+            >Delete</a
+          >
+        </td>
+        <td style="width: 10%">
+          <a
+            class="pointer"
+            [routerLink]="['/capacity', machine.id, locationId]"
+            aria-label="Add Capacity"
+            >Add Capacity</a
+          >
+        </td>
+      </tr>
+    </tbody>
+    <tbody *ngIf="MachinesModel == null || MachinesModel?.length == 0">
+      <tr>
+        <td
+          colspan="9"
+          style="width: 100%"
+          class="no-data-available"
+          aria-label="No data"
+        >
+          No data!
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody></tbody>
+  </table>
+</div>
+
+<ng-template #deleteContent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" aria-label="Confirmation">
+      Confirmation
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to delete this?</p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="d('Cross click')"
+      aria-label="Cancel"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="c('yes')"
+      aria-label="Yes"
+    >
+      Yes
+    </button>
+  </div>
+</ng-template>

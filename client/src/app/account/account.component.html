@@ -1,0 +1,199 @@
+<div class="container">
+  <div class="text-center">
+    <h1>Account</h1>
+  </div>
+  <div>
+    <tabset>
+      <tab heading="Personal Details" aria-label="Personal Details">
+        <div class="col-md-8 order-md-1">
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="firstName" aria-label="First Name"
+                  >First name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="firstName"
+                  value="{{ userInfo?.firstName }}"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="lastName" aria-label="Last Name">Last name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  value="{{ userInfo?.lastName }}"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="username" aria-label="Username">Username</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    value="{{ userInfo?.username }}"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="email" aria-label="Email">Email </label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  value="{{ userInfo?.email }}"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </tab>
+      <tab heading="Customer Details" aria-label="Customer Details">
+        <div class="col-md-8 order-md-1">
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="customerName" aria-label="Customer Name"
+                  >Customer name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="customerName"
+                  value="{{ userInfo?.customer?.name }}"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="industry" aria-label="Industry">Industry</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="industry"
+                  value="{{ userInfo?.customer?.industryId }}"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="address" aria-label="Address">Address</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    value="{{ userInfo?.customer?.addressId }}"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="vatRegNo" aria-label="VAT Registration No"
+                  >VAT Registration No
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="vatRegNo"
+                  value="{{ userInfo?.customer?.vatRegistrationNo }}"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="billingAddress" aria-label="Billing Address"
+                  >Billing Address</label
+                >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="billingAddress"
+                    value="{{ userInfo?.customer?.billingAddressId }}"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </tab>
+      <tab
+        heading="Manufacturer Details"
+        *ngIf="userInfo?.customer?.isSellCapacity == true"
+        aria-label="Manufacturer Details"
+      >
+        <div class="col-md-8 order-md-1">
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="manufacturerName" aria-label="Manufacturer Name"
+                  >Manufacturer name</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="manufacturerName"
+                  value="{{ userInfo?.manufacturer?.name }}"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label for="industry" aria-label="Industry">Industry</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="industry"
+                  value="{{ userInfo?.manufacturer?.industryId }}"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="address" aria-label="Address">Address</label>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="address"
+                    value="{{ userInfo?.manufacturer?.addressId }}"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="vatRegNo" aria-label="VAT Registration No"
+                  >VAT Registration No
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="vatRegNo"
+                  value="{{ userInfo?.manufacturer?.vatRegistrationNo }}"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="billingAddress" aria-label="Billing Address"
+                  >Billing Address</label
+                >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="billingAddress"
+                    value="{{ userInfo?.manufacturer?.billingAddressId }}"
+                  />
+                </div>
+              </div>
+            </div>
+          </form></div
+      ></tab>
+    </tabset>
+  </div>
+</div>

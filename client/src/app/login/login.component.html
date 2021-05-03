@@ -1,0 +1,48 @@
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <br />
+    <form autocomplete="off">
+      <input
+        type="text"
+        id="login"
+        class="fadeIn second"
+        [(ngModel)]="model.username"
+        name="username"
+        placeholder="User Name"
+        required
+        aria-label="Username"
+      />
+      <input
+        type="password"
+        id="password"
+        class="fadeIn third"
+        [(ngModel)]="model.password"
+        name="password"
+        placeholder="Password"
+        required
+        aria-label="Password"
+      />
+      <input
+        type="submit"
+        class="fadeIn fourth"
+        (click)="login()"
+        value="LogIn"
+        aria-label="Login"
+      />
+    </form>
+    <div id="formFooter">
+      Don't have an account?
+      <a
+        class="underlineHover"
+        href="#"
+        routerLink="/register"
+        aria-label="Sign Up"
+        ><b>Sign Up</b></a
+      >
+      <br />
+      <a class="underlineHover" href="#" aria-label="Forgot Password"
+        >Forgot Password?</a
+      >
+    </div>
+  </div>
+</div>

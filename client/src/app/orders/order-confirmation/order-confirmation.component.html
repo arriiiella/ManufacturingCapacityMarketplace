@@ -1,0 +1,152 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="text-center text-primary" aria-label="Orders">Orders</h2>
+  </div>
+</div>
+<div *ngIf="this.orderInfo?.length > 0" class="m-0">
+  <div class="m-0" *ngFor="let orders of orderInfo; index as i">
+    <div class="mb-5" *ngIf="isShow">
+      <table width="30%" style="text-align: left">
+        <tr>
+          <td><b>Order No : </b></td>
+          <td>{{ i + 1 }}</td>
+        </tr>
+        <tr>
+          <td><b>Customer :</b></td>
+          <td>{{ userInfo?.customer?.name }}</td>
+        </tr>
+        <tr>
+          <td><b>Manufacturer :</b></td>
+          <td>{{ orders[0].manufacturerName }}</td>
+        </tr>
+        <tr>
+          <td><b>Order Date :</b></td>
+          <td>{{ todayDate | date: "mediumDate" }}</td>
+        </tr>
+      </table>
+      <hr />
+      <div class="m-0">
+        <div class="table-responsive">
+          <table
+            class="row-border hover table table-responsive"
+            width="100%"
+            border="1"
+          >
+            <thead class="thead-dark">
+              <tr>
+                <th width="7%">Line No</th>
+                <th width="10%">Location Id</th>
+                <th width="10%">Machine</th>
+                <th width="10%">Model</th>
+                <th width="10%">Date</th>
+                <th width="10%">Start Time</th>
+                <th width="10%">Capacity</th>
+                <th width="13%">Cost Per Unit</th>
+                <th width="10%">Line Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orders; index as oi">
+                <td>{{ oi + 1 }}</td>
+                <td>{{ order.locationId }}</td>
+                <td>{{ order.machineName }}</td>
+                <td>{{ order.modelNo }}</td>
+                <td>{{ order.date | date: "MM/dd/yyyy" }}</td>
+                <td>
+                  {{
+                    order.startTime.hours < 9
+                      ? "0" + order.startTime.hours
+                      : order.startTime.hours
+                  }}:{{
+                    order.startTime.minutes < 9
+                      ? "0" + order.startTime.minutes
+                      : order.startTime.minutes
+                  }}
+                </td>
+                <td>{{ order.capacity }}</td>
+                <td>{{ order.costPerUnit }}</td>
+                <td>{{ order.capacityCost }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+  <div class="m-0" *ngIf="!isShow">
+    <div class="mb-5">
+      <table width="30%" style="text-align: left">
+        <tr>
+          <td><b>Order No : </b></td>
+          <td>{{ orderInfo[0].orderNumber }}</td>
+        </tr>
+        <tr>
+          <td><b>Customer :</b></td>
+          <td>{{ orderInfo[0].customerName }}</td>
+        </tr>
+        <tr>
+          <td><b>Manufacturer :</b></td>
+          <td>{{ orderInfo[0].manufacturerName }}</td>
+        </tr>
+        <tr>
+          <td><b>Order Date :</b></td>
+          <td>{{ orderInfo[0].orderDate | date: "mediumDate" }}</td>
+        </tr>
+      </table>
+      <hr />
+      <div class="m-0">
+        <div class="table-responsive">
+          <table
+            class="row-border hover table table-responsive"
+            width="100%"
+            border="1"
+          >
+            <thead class="thead-dark">
+              <tr>
+                <th width="7%">Line No</th>
+                <th width="10%">Location Id</th>
+                <th width="10%">Machine</th>
+                <th width="10%">Model</th>
+                <th width="10%">Date</th>
+                <th width="10%">Start Time</th>
+                <th width="10%">Capacity</th>
+                <th width="13%">Cost Per Unit</th>
+                <th width="10%">Line Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let order of orderInfo; index as oi">
+                <td>{{ order.lineNumber }}</td>
+                <td>{{ order.locationId }}</td>
+                <td>{{ order.machineName }}</td>
+                <td>{{ order.modelNo }}</td>
+                <td>{{ order.orderDate | date: "MM/dd/yyyy" }}</td>
+                <td>
+                  {{
+                    order.startTime.hours < 9
+                      ? "0" + order.startTime.hours
+                      : order.startTime.hours
+                  }}:{{
+                    order.startTime.minutes < 9
+                      ? "0" + order.startTime.minutes
+                      : order.startTime.minutes
+                  }}
+                </td>
+                <td>{{ order.capacity }}</td>
+                <td>{{ order.costPerUnit }}</td>
+                <td>{{ order.lineAmount }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-md-12 text-center" *ngIf="isShow">
+  <button class="btn btn-primary mr-2" (click)="confirmOrder()" type="submit">
+    Confirm Order
+  </button>
+</div>

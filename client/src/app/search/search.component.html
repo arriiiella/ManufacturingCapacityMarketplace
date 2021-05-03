@@ -1,0 +1,240 @@
+<div class="row">
+  <div class="col-md-6">
+    <h2 class="text-center text-primary" aria-label="Search Capacity">
+      Search Capacity
+    </h2>
+  </div>
+  <div class="col-md-6">
+    <table width="100%" style="text-align: right">
+      <tr>
+        <td><b>Username : </b>{{ userInfo?.username }}</td>
+      </tr>
+      <tr>
+        <td><b>Customer :</b> {{ userInfo?.customer?.name }}</td>
+      </tr>
+    </table>
+  </div>
+</div>
+<div class="col-md-12 mb-5">
+  <form #locationForm="ngForm" autocomplete="off">
+    <hr />
+    <div class="row col-md-12">
+      <div class="col-md-2">
+        <label for="BusinessName" class="pull-right" aria-label="Industry Type"
+          >Industry Type</label
+        >
+      </div>
+      <div class="col-md-3">
+        <div class="input-group">
+          <select
+            [(ngModel)]="industryTypeId"
+            class="form-control"
+            name="IndustryType"
+          >
+            <option value="0">Select Industry Type</option>
+            <option
+              *ngFor="let industry of IndustryTypes"
+              [value]="industry.id"
+            >
+              {{ industry.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <label for="BusinessName" class="pull-right" aria-label="Process"
+          >Process</label
+        >
+      </div>
+      <div class="col-md-3">
+        <div class="input-group">
+          <select
+            [(ngModel)]="ManufacturingProcessId"
+            class="form-control"
+            name="ManufacturingProcessId"
+          >
+            <option value="0">Select Process</option>
+            <option
+              *ngFor="let process of ManufacturingProcessesModel"
+              [value]="process.id"
+            >
+              {{ process.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-1">
+        <label for="BusinessName" class="pull-right" aria-label="City"
+          >City</label
+        >
+      </div>
+      <div class="col-md-2">
+        <div class="input-group">
+          <select [(ngModel)]="cityName" class="form-control" name="cityName">
+            <option value="">Select City</option>
+            <option *ngFor="let city of cityListVM" [value]="city">
+              {{ city }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row col-md-12 mt-3">
+      <div class="col-md-2">
+        <label for="BusinessName" class="pull-right" aria-label="Start Date"
+          >Start Date</label
+        >
+      </div>
+      <div class="col-md-3">
+        <div class="form-group">
+          <div class="input-group">
+            <input
+              class="form-control"
+              placeholder="MM/DD/YYYY"
+              name="machineCapacityStartDate"
+              [(ngModel)]="machineCapacityStartDate"
+              autocomplete="nope"
+              onkeydown="return false"
+              (click)="d.toggle()"
+              (ngModelChange)="onSelectStartDate($event)"
+              ngbDatepicker
+              #d="ngbDatepicker"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <label for="BusinessName" class="pull-right" aria-label="End Date"
+          >End Date</label
+        >
+      </div>
+      <div class="col-md-3">
+        <div class="input-group">
+          <div class="form-group">
+            <div class="input-group">
+              <input
+                class="form-control"
+                placeholder="MM/DD/YYYY"
+                name="machineCapacityEndDate"
+                [(ngModel)]="machineCapacityEndDate"
+                onkeydown="return false"
+                (click)="d1.toggle()"
+                (ngModelChange)="onSelectEndDate($event)"
+                ngbDatepicker
+                #d1="ngbDatepicker"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <button
+          class="btn btn-success mr-2"
+          (click)="filterTable()"
+          type="submit"
+          aria-label="Search"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div [class.ngHide]="searchCriteria.isPageLoad" style="width: 100%">
+  <table
+    datatable
+    [dtOptions]="dtOptions"
+    class="row-border hover table table-responsive"
+    width="100%"
+  >
+    <thead
+      class="thead-dark"
+      [ngClass]="
+        SpareCapacitiesModel != null && SpareCapacitiesModel?.length != 0
+          ? 'thead-dark'
+          : 'thead-dark thead-dark-empty'
+      "
+    >
+      <tr>
+        <th>Location</th>
+        <th>Process</th>
+        <th>Machine</th>
+        <th>Model</th>
+        <th>Date</th>
+        <th>Start Time</th>
+        <th>Capacity</th>
+        <th>Cost Per Unit</th>
+        <th>Capacity Cost</th>
+        <th>Select</th>
+      </tr>
+    </thead>
+    <tbody
+      *ngIf="SpareCapacitiesModel != null || SpareCapacitiesModel?.length != 0"
+    >
+      <tr *ngFor="let spareView of SpareCapacitiesModel">
+        <td style="width: 30%">{{ spareView.locationName }}</td>
+        <td style="width: 30%">{{ spareView.processName }}</td>
+        <td style="width: 30%">{{ spareView.machineName }}</td>
+        <td style="width: 40%">{{ spareView.modelNo }}</td>
+        <td style="width: 18%">{{ spareView.date | date: "MM/dd/yyyy" }}</td>
+        <td style="width: 18%">
+          {{
+            spareView.startTime.hours < 9
+              ? "0" + spareView.startTime.hours
+              : spareView.startTime.hours
+          }}:{{
+            spareView.startTime.minutes < 9
+              ? "0" + spareView.startTime.minutes
+              : spareView.startTime.minutes
+          }}
+        </td>
+        <td style="width: 18%">{{ spareView.capacity }}</td>
+        <td style="width: 18%">{{ spareView.costPerUnit }}</td>
+        <td style="width: 18%">{{ spareView.capacityCost }}</td>
+        <td style="width: 10%">
+          <input
+            type="checkbox"
+            id="chk_{{ spareView.capacityEntryNo }}"
+            (change)="storeOrderIdChange($event, spareView.capacityEntryNo)"
+            [checked]="isSelected(spareView.capacityEntryNo)"
+          />
+        </td>
+      </tr>
+    </tbody>
+    <tbody
+      *ngIf="SpareCapacitiesModel == null || SpareCapacitiesModel?.length == 0"
+    >
+      <tr>
+        <td colspan="10" style="width: 100%" class="no-data-available">
+          No data!
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody></tbody>
+  </table>
+</div>
+
+<div class="row mt-3 mb-3">
+  <div class="col-md-6 text-right">
+    <button
+      class="btn btn-primary mr-2"
+      (click)="createOrder()"
+      type="submit"
+      aria-label="Create Order"
+    >
+      Create Order
+    </button>
+  </div>
+  <div class="col-md-6 text-left">
+    <button
+      class="btn btn-danger mr-2"
+      (click)="clearOrderSelection()"
+      type="submit"
+      aria-label="Clear Order Selection"
+    >
+      Clear Order Selection
+    </button>
+  </div>
+</div>

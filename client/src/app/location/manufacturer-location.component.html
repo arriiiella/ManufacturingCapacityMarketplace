@@ -1,0 +1,342 @@
+<div class="col-md-6 offset-md-3">
+  <form #locationForm="ngForm" autocomplete="off">
+    <h2 class="text-center text-primary" aria-label="Add Location">
+      Add Location
+    </h2>
+    <hr />
+    <div class="form-group row">
+      <label
+        for="BusinessName"
+        class="col-sm-3 col-form-label"
+        aria-label="Location Name"
+        >Location Name
+      </label>
+      <div class="col-sm-9">
+        <input
+          type="text"
+          class="form-control"
+          name="BusinessName"
+          [(ngModel)]="ManufacturingLocationModel.Name"
+          placeholder="Location Name"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="Address" class="col-sm-3 col-form-label" aria-label="Address"
+        >Address</label
+      >
+      <div class="col-sm-7">
+        <select
+          [(ngModel)]="ManufacturingLocationModel.AddressId"
+          class="form-control"
+          name="Address"
+        >
+          <option value="0">Select Address</option>
+          <option *ngFor="let addr of AddressesModel" [value]="addr.id">
+            {{ addr.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-sm-2">
+        <button
+          class="btn btn-primary mr-2"
+          (click)="openAddress(content)"
+          type="button"
+          aria-label="Create New Location"
+        >
+          Add
+        </button>
+      </div>
+    </div>
+    <div class="form-group text-center">
+      <button
+        class="btn btn-success mr-2"
+        (click)="saveLocation()"
+        type="submit"
+        aria-label="Add Location"
+      >
+        Add
+      </button>
+    </div>
+  </form>
+
+  <ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title" aria-label="Add Address">
+        Add Address
+      </h4>
+      <button
+        type="button"
+        class="close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form>
+        <div class="form-group row">
+          <div class="col-md-6">
+            <label for="AddressName" aria-label="Address Name">Name</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                required
+                name="AddressName"
+                [(ngModel)]="AddressModel.Name"
+                placeholder="Name Of Address"
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="Email" aria-label="Email">Email</label>
+            <div class="input-group">
+              <input
+                type="email"
+                class="form-control"
+                name="Email"
+                [(ngModel)]="AddressModel.Email"
+                placeholder="Email"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="AddressName" aria-label="Address Line 1"
+            >Address Line 1</label
+          >
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="AddressName"
+              [(ngModel)]="AddressModel.Address1"
+              placeholder="Address Line 1"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="AddressName" aria-label="Address Line 2"
+            >Address Line 2</label
+          >
+          <div class="input-group">
+            <input
+              type="text"
+              class="form-control"
+              name="AddressName2"
+              [(ngModel)]="AddressModel.Address2"
+              placeholder="Address Line 2"
+            />
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-4">
+            <label for="City" aria-label="City">City</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                name="City"
+                [(ngModel)]="AddressModel.City"
+                placeholder="City"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="Country" aria-label="County">County</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                name="County"
+                [(ngModel)]="AddressModel.County"
+                placeholder="County"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="PostalCode" aria-label="Postal Code">Postal Code</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                name="PostalCode"
+                [(ngModel)]="AddressModel.Postcode"
+                placeholder="PostalCode"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group row">
+          <div class="col-md-4">
+            <label for="CountryCode" aria-label="Country">Country</label>
+            <div class="input-group">
+              <select
+                [(ngModel)]="AddressModel.CountryCode"
+                class="form-control"
+                name="CountryCode"
+              >
+                <option value="">Select Country</option>
+                <option
+                  *ngFor="let country of countries"
+                  [value]="country.code"
+                >
+                  {{ country.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="Telephone" aria-label="Telephone">Telephone</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                name="Telephone"
+                [(ngModel)]="AddressModel.Telephone"
+                placeholder="Telephone"
+              />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="Fax" aria-label="Fax">Fax</label>
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                name="Fax"
+                [(ngModel)]="AddressModel.Fax"
+                placeholder="Fax"
+              />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline-success"
+        (click)="saveAddress()"
+        aria-label="Save Address"
+      >
+        Save
+      </button>
+    </div>
+  </ng-template>
+</div>
+
+<div [class.ngHide]="searchCriteria.isPageLoad" style="width: 100%">
+  <table
+    datatable
+    [dtOptions]="dtOptions"
+    class="row-border hover table table-responsive"
+    width="100%"
+  >
+    <thead
+      class="thead-success"
+      [ngClass]="
+        ManufacturingLocationsModel != null &&
+        ManufacturingLocationsModel?.length != 0
+          ? 'thead-dark'
+          : 'thead-dark thead-dark-empty'
+      "
+    >
+      <tr>
+        <th aria-label="Id">Id</th>
+        <th aria-label="Location Name">Location Name</th>
+        <th aria-label="Address">Address</th>
+        <th aria-label="Address 2">Address 2</th>
+        <th aria-label="City">City</th>
+        <th aria-label="County">County</th>
+        <th aria-label="PostCode">PostCode</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody
+      *ngIf="
+        ManufacturingLocationsModel != null ||
+        ManufacturingLocationsModel?.length != 0
+      "
+    >
+      <tr *ngFor="let location of ManufacturingLocationsModel">
+        <td style="width: 2%">{{ location.id }}</td>
+        <td style="width: 30%">{{ location.name }}</td>
+        <td style="width: 30%">{{ location.address?.address1 }}</td>
+        <td style="width: 40%">{{ location.address?.address2 }}</td>
+        <td style="width: 18%">{{ location.address?.city }}</td>
+        <td style="width: 18%">{{ location.address?.county }}</td>
+        <td style="width: 18%">{{ location.address?.postcode }}</td>
+        <td style="width: 2%">
+          <a class="pointer" (click)="deletePopup(deleteContent, location.id)"
+            >Delete</a
+          >
+        </td>
+        <td style="width: 2%">
+          <a
+            class="pointer"
+            [routerLink]="['/machines', location.id]"
+            aria-label="Add Machine"
+            >Add Machine</a
+          >
+        </td>
+      </tr>
+    </tbody>
+    <tbody
+      *ngIf="
+        ManufacturingLocationsModel == null ||
+        ManufacturingLocationsModel?.length == 0
+      "
+    >
+      <tr>
+        <td colspan="9" style="width: 100%" class="no-data-available">
+          No data!
+        </td>
+      </tr>
+    </tbody>
+
+    <tbody></tbody>
+  </table>
+</div>
+
+<ng-template #deleteContent let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title" aria-label="Confirmation">
+      Confirmation
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="d('Cross click')"
+    >
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p aria-label="Are you sure you want to delete?">
+      Are you sure you want to delete?
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="d('Cross click')"
+      aria-label="Cancel"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="c('yes')"
+      aria-label="Yes"
+    >
+      Yes
+    </button>
+  </div>
+</ng-template>
