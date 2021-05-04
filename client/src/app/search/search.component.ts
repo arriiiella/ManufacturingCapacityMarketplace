@@ -1,18 +1,13 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import {
-  ModalDismissReasons,
   NgbDateParserFormatter,
   NgbDateStruct,
-  NgbModal,
-  NgbModalOptions,
 } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { UserService } from '../_services/user/user.service';
 import * as Capacity from '../_models/capacity';
 import { ManufacturingProcess } from '../_models/manufacturingProcess';
-import { HttpClient } from '@angular/common/http';
 import { SearchCriteriaSpareCapacity } from '../_models/data-table';
 import { Subject, Subscription } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
@@ -103,9 +98,11 @@ export class SearchComponent implements OnInit {
       });
     }
   }
+
   isSelected(id: number) {
     return this.selectedOrdersIds.some((rowId) => rowId == id);
   }
+  
   onSelectStartDate(date: NgbDateStruct) {
     if (date != null) {
       this.machineCapacityStartDate = date;

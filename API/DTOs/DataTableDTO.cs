@@ -21,15 +21,6 @@ namespace API.DTOs
         public Search Search { get; set; }
     }
 
-    public class Order
-    {
-        [JsonProperty(PropertyName = "column")]
-        public int Column { get; set; }
-        
-        [JsonProperty(PropertyName = "dir")]
-        public string Dir { get; set; }
-    }
-
     public class PagingRequest
     {
         [JsonProperty(PropertyName = "draw")]
@@ -49,21 +40,6 @@ namespace API.DTOs
 
         [JsonProperty(PropertyName = "searchCriteria")]
         public SearchCriteria SearchCriteria { get; set; }
-    }
-
-    public class PagingResponse
-    {
-        [JsonProperty(PropertyName = "draw")]
-        public int Draw { get; set; }
-
-        [JsonProperty(PropertyName = "recordsFiltered")]
-        public int RecordsFiltered { get; set; }
-
-        [JsonProperty(PropertyName = "recordsTotal")]
-        public int RecordsTotal { get; set; }
-
-        [JsonProperty(PropertyName = "data")]
-        public AddressDTO[] Data { get; set; }
     }
 
     public class OrdersPagingResponse
