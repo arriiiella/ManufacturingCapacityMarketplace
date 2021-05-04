@@ -1,31 +1,43 @@
-<div class="container mt-5">
-  <div style="text-align: center">
-    <h1 aria-label="Find Excess Manufacturing In Your Local Area">
+<div class="row cont">
+  <div class="container mt-5">
+    <h1
+      class="h1"
+      style="text-align: center"
+      aria-label="Find Excess Manufacturing In Your Local Area"
+    >
       Find Excess Manufacturing In Your Local Area
     </h1>
-    <p
-      class="lead"
-      aria-label="Join today to buy and sell excess manufacturing. 
-      All you need to do is sign up!"
-    >
-      Join today to buy and sell excess manufacturing. <br />
-      All you need to do is sign up!
+  </div>
+
+  <div class="col-lg-4 col-md-4 col-sm-12">
+    <img src="../../assets/images/pic1.jpg" class="img-fluid img" />
+  </div>
+  <div class="col-lg-8 col-md-8 col-sm-12 desc">
+    <h3 class="h3">Join today to buy and sell excess manufacturing.</h3>
+    <p class="text">
+      Manufacturers can post details of their spare capacity and allow others to
+      search for available capacity in their specific area of manufacturing.
+      This is a great benefit for small start-up companies to give them the
+      ability to outsource their production without having to invest heavily in
+      equipment. <br />
+      <br />
+      To get started all you need to do is sign up!
     </p>
-    <div class="text-center">
-      <button
-        (click)="clickRegister()"
-        class="btn btn-primary btn-lg mr-2"
-        aria-label="Register"
-      >
-        Register
-      </button>
-      <button
-        (click)="clickLogin()"
-        class="btn btn-info btn-lg"
-        aria-label="Login"
-      >
-        Login
-      </button>
-    </div>
+  </div>
+  <div class="col text-center">
+    <button
+      (click)="clickRegister()"
+      class="btn btn-primary btn-lg mr-2"
+      aria-label="Register"
+    >
+      Register
+    </button>
+    <button
+      (click)="clickLogin()"
+      class="btn btn-info btn-lg"
+      aria-label="Login"
+    >
+      Login
+    </button>
   </div>
 </div>

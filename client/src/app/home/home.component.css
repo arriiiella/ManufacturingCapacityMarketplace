@@ -1,0 +1,30 @@
+.cont {
+  margin: 4em 0;
+  padding: 1em;
+  position: relative;
+}
+.h1 {
+  margin: -1.8em;
+}
+
+.h3 {
+  text-align: left;
+}
+
+.img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  margin-left: -1.8em;
+}
+.cont .desc {
+  padding: 2em;
+  border-left: 4px solid;
+}
+.about .desc p {
+  line-height: 2;
+}
+
+.text {
+  font-size: large;
+}
