@@ -1,11 +1,10 @@
-<div class="wrapper fadeInDown">
+<div class="wrapper">
   <div id="formContent">
     <br />
     <form autocomplete="off">
       <input
         type="text"
         id="login"
-        class="fadeIn second"
         [(ngModel)]="model.username"
         name="username"
         placeholder="User Name"
@@ -15,7 +14,6 @@
       <input
         type="password"
         id="password"
-        class="fadeIn third"
         [(ngModel)]="model.password"
         name="password"
         placeholder="Password"
@@ -24,7 +22,6 @@
       />
       <input
         type="submit"
-        class="fadeIn fourth"
         (click)="login()"
         value="LogIn"
         aria-label="Login"
